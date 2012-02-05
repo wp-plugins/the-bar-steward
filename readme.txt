@@ -38,7 +38,7 @@ Upload in the normal way, to your `/wp-content/plugins/` folder and activate.
 
 == Frequently Asked Questions ==
 
-What plugin menus does this remove from my admin bar?
+= What plugin menus does this remove from my admin bar? =
 Plug-ins affected with this version:
 
 * Yoast WordPress SEO
