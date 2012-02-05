@@ -4,7 +4,7 @@ Donate link: http://wordpressfoundation.org/donate/
 Tags: admin bar, link, menu, removal, yoast wordpress seo, cdn synch tool, nextgen gallery
 Requires at least: 3.0
 Tested up to: 3.3.1
-Stable tag:1.0
+Stable tag:1.1
 
 Certain WordPress plugins hijack your back and front end admin bar. Kick them out with this plugin.
 
@@ -13,9 +13,14 @@ Certain WordPress plugins hijack your back and front end admin bar. Kick them ou
 Some plugins like to embed themselves into the default WordPress admin bar. Some developers and their clients dislike this.
 
 Plug-ins that do this are:
+
 * Yoast WordPress SEO
+
 * CDN Synch Tool
+
 * NextGen Gallery
+
+* BackWPup <~ NEW
 
 Remove all of these from your admin bar with this plugin.
 
@@ -35,16 +40,22 @@ Upload in the normal way, to your `/wp-content/plugins/` folder and activate.
 
 What plugin menus does this remove from my admin bar?
 Plug-ins affected with this version:
+
 * Yoast WordPress SEO
+
 * CDN Synch Tool
+
 * NextGen Gallery
+
+* BackWPup
 
 == Changelog ==
 
-= v0.2 =
-* Added fancy ol' options panel
+= v1.1 =
+* Added 'remove BackWPup' option
 
-= v0.1 =
+= v1 =
+* Added fancy ol' options panel
 * Created plug-in
 * Checked for 3.3.1 compatibility
 * Made coffee

@@ -1,6 +1,6 @@
 <?php /*
 Plugin Name: The Bar Steward
-Version: 1.0
+Version: 1.1
 Plugin URI: http://wordpress.org/extend/plugins/the-bar-steward/
 Author: Lee Rickler
 Author URI: http://rickler.com
@@ -85,7 +85,14 @@ input.checkbox {
     <td><input name="pands_tbs_plugin_options[remove_nxgen]" type="checkbox" value="1" <?php checked('1', $options['remove_nxgen']); ?> /></td>
     <?php } else {
     echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/nextgen-gallery/" target="_blank">NextGen Gallery</a>.</td>'; } ?>
-  </tr> 
+  </tr>
+  <tr><?php
+   if (is_plugin_active('backwpup/backwpup.php')) { ?>
+    <td>Remove BackWPup</td>
+    <td><input name="pands_tbs_plugin_options[remove_bwpu]" type="checkbox" value="1" <?php checked('1', $options['remove_bwpu']); ?> /></td>
+    <?php } else {
+    echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/backwpup/" target="_blank">BackWPup</a>.</td>'; } ?>
+  </tr>
 </table>
 <br />Simply choose the options required, above, and click 'Save changes'.<br />I welcome further suggestions, corrections or simply a better way of doing stuff, so feel free to <a href="mailto:wordpress@pointandstare.com">email</a>.</p>
 <div id="tabs-pands-script">
@@ -135,5 +142,19 @@ $options = get_option('pands_tbs_plugin_options');
 add_action( 'wp_before_admin_bar_render', 'pands_remove_nxg' );
 }
  else {
-    echo ''; } 
+    echo ''; }
+    
+if(is_plugin_active('backwpup/backwpup.php'))
+{
+// REMOVE BACKWPUP FROM THE TOOL BAR
+function pands_remove_bwpu() {
+$options = get_option('pands_tbs_plugin_options');
+	global $wp_admin_bar;
+		 $wp_admin_bar->add_menu(array( 'id' => 'backwpup', 'title' => __( 'BackWPup', 'textdomain' ), 'href' => backwpup_admin_url('admin.php').'?page=backwpup'));
+		if ($options['remove_bwpu'] == 1) $wp_admin_bar->remove_menu('backwpup');
+	}
+add_action( 'wp_before_admin_bar_render', 'pands_remove_bwpu' );
+}
+ else {
+    echo ''; }
 ?>
