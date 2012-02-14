@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: Lee Rickler
 Donate link: http://wordpressfoundation.org/donate/
-Tags: admin bar, link, menu, removal, yoast wordpress seo, cdn synch tool, nextgen gallery, backwpup, Social Metrics Ultimate Security Checker
+Tags: admin bar, link, menu, removal, yoast wordpress seo, cdn synch tool, nextgen gallery, backwpup, Social Metrics, Ultimate Security Checker
 Requires at least: 3.0
 Tested up to: 3.3.1
 Stable tag:1.2
