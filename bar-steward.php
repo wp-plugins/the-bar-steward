@@ -1,6 +1,6 @@
 <?php /*
 Plugin Name: The Bar Steward
-Version: 1.1
+Version: 1.2
 Plugin URI: http://wordpress.org/extend/plugins/the-bar-steward/
 Author: Lee Rickler
 Author URI: http://rickler.com
