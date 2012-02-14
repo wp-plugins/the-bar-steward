@@ -13,12 +13,13 @@ Certain WordPress plugins hijack your back and front end admin bar. Kick them ou
 Some plugins like to embed themselves into the default WordPress admin bar. Some developers and their clients dislike this.
 
 Plug-ins that do this are:
-= Yoast WordPress SEO
-= CDN Synch Tool
-= NextGen Gallery
-= BackWPup
-= Social Metrics
-= Ultimate Security Checker
+
+* Yoast WordPress SEO
+* CDN Synch Tool
+* NextGen Gallery
+* BackWPup
+* Social Metrics
+* Ultimate Security Checker
 
 Remove all or any of these from your admin bar with this plugin.
 
