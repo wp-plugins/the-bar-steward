@@ -16,7 +16,6 @@ add_action( 'admin_init', 'pands_tbs_admin_init' );
 	function pands_tbs_admin_init() {
 	register_setting( 'pands_tbs_options', 'pands_tbs_plugin_options');
 }
-
 function pands_tbs_page() {
 ?>
 <style media="screen" type="text/css">
@@ -70,28 +69,42 @@ input.checkbox {
     <td>Remove Yoast WordPress SEO</td>
     <td><input name="pands_tbs_plugin_options[remove_wpseo]" type="checkbox" value="1" <?php checked('1', $options['remove_wpseo']); ?> /></td>
     <?php } else {
-    echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/wordpress-seo/" target="_blank">Yoast WordPress SEO</a>.</td>'; } ?>
-  </tr>
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/wordpress-seo/" target="_blank">Yoast WordPress SEO</a>.</td>'; } ?>
+    </tr>
     <tr><?php
    if (is_plugin_active('cdn-sync-tool/cdn-sync-tool.php')) { ?>
     <td>Remove CDN Synch Tool</td>
     <td><input name="pands_tbs_plugin_options[remove_cdn]" type="checkbox" value="1" <?php checked('1', $options['remove_cdn']); ?> /></td>
     <?php } else {
-    echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/cdn-sync-tool/" target="_blank">CDN Synch Tool</a>.</td>'; } ?>
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/cdn-sync-tool/" target="_blank">CDN Synch Tool</a>.</td>'; } ?>
   </tr>
   <tr><?php
    if (is_plugin_active('nextgen-gallery/nggallery.php')) { ?>
     <td>Remove NextGen Gallery</td>
     <td><input name="pands_tbs_plugin_options[remove_nxgen]" type="checkbox" value="1" <?php checked('1', $options['remove_nxgen']); ?> /></td>
     <?php } else {
-    echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/nextgen-gallery/" target="_blank">NextGen Gallery</a>.</td>'; } ?>
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/nextgen-gallery/" target="_blank">NextGen Gallery</a>.</td>'; } ?>
   </tr>
   <tr><?php
    if (is_plugin_active('backwpup/backwpup.php')) { ?>
     <td>Remove BackWPup</td>
     <td><input name="pands_tbs_plugin_options[remove_bwpu]" type="checkbox" value="1" <?php checked('1', $options['remove_bwpu']); ?> /></td>
     <?php } else {
-    echo '<td colspan="2">You haven\'t installed <a href="http://wordpress.org/extend/plugins/backwpup/" target="_blank">BackWPup</a>.</td>'; } ?>
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/backwpup/" target="_blank">BackWPup</a>.</td>'; } ?>
+  </tr>
+  <tr><?php
+   if (is_plugin_active('social-metrics/socialmetrics.php')) { ?>
+    <td>Remove Social Metrics</td>
+    <td><input name="pands_tbs_plugin_options[remove_some]" type="checkbox" value="1" <?php checked('1', $options['remove_some']); ?> /></td>
+    <?php } else {
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/social-metrics/" target="_blank">Social Metrics</a>.</td>'; } ?>
+  </tr>
+  <tr><?php
+   if (is_plugin_active('ultimate-security-checker/wp-ultimate-security.php')) { ?>
+    <td>Remove Ultimate Security Checker</td>
+    <td><input name="pands_tbs_plugin_options[remove_usc]" type="checkbox" value="1" <?php checked('1', $options['remove_usc']); ?> /></td>
+    <?php } else {
+    echo '<td colspan="2">You haven\'t installed or activated <a href="http://wordpress.org/extend/plugins/ultimate-security-checker/" target="_blank">Ultimate Security Checker</a>.</td>'; } ?>
   </tr>
 </table>
 <br />Simply choose the options required, above, and click 'Save changes'.<br />I welcome further suggestions, corrections or simply a better way of doing stuff, so feel free to <a href="mailto:wordpress@pointandstare.com">email</a>.</p>
@@ -104,57 +117,60 @@ input.checkbox {
 }
 if(!function_exists('is_plugin_active'))
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+// REMOVE YOAST WORDPRESS SEO FROM THE TOOL BAR
 if(is_plugin_active('wordpress-seo/wp-seo.php'))
 {
-// REMOVE YOAST WORDPRESS SEO FROM THE TOOL BAR
 function pands_remove_yoastwpseo() {
 $options = get_option('pands_tbs_plugin_options');
-global $wp_admin_bar;
-	$wp_admin_bar->add_menu( array( 'id' => 'wpseo-menu', 'title' => __( 'SEO', 'wordpress-seo' ), 'href' => get_admin_url('admin.php?page=wpseo_dashboard'), ) );
-	if ($options['remove_wpseo'] == 1) $wp_admin_bar->remove_menu('wpseo-menu');
-}
-add_action( 'wp_before_admin_bar_render', 'pands_remove_yoastwpseo' );
-}
- else {
-    echo ''; }
-if(is_plugin_active('cdn-sync-tool/cdn-sync-tool.php'))
-{
-// REMOVE CDN SYNCH TOOL FROM THE TOOL BAR
-function pands_remove_cdn() {
-	$options = get_option('pands_tbs_plugin_options');
 	global $wp_admin_bar;
-		$wp_admin_bar->add_menu( array( 'title' => 'CDN Sync Tool', 'href' => get_admin_url('admin.php?page=cst-main'), 'id' => 'cst-main') );		
-		if ($options['remove_cdn'] == 1) $wp_admin_bar->remove_menu('cst-main');
-	}
-add_action( 'wp_before_admin_bar_render', 'pands_remove_cdn' );
-}
- else {
-    echo ''; }
-if(is_plugin_active('nextgen-gallery/nggallery.php'))
-{
+	if ($options['remove_wpseo'] == 1) $wp_admin_bar->remove_menu('wpseo-menu'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_yoastwpseo' ); }
+ else { echo ''; }
+
+// REMOVE CDN SYNCH TOOL FROM THE TOOL BAR
+if(is_plugin_active('cdn-sync-tool/cdn-sync-tool.php')) {
+function pands_remove_cdn() {
+$options = get_option('pands_tbs_plugin_options');
+	global $wp_admin_bar;
+	if ($options['remove_cdn'] == 1) $wp_admin_bar->remove_menu('cst-main'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_cdn' ); }
+ else { echo ''; }
+
 // REMOVE NEXT GEN FROM THE TOOL BAR
+if(is_plugin_active('nextgen-gallery/nggallery.php')) {
 function pands_remove_nxg() {
 $options = get_option('pands_tbs_plugin_options');
 	global $wp_admin_bar;
-		$wp_admin_bar->add_menu( array( 'id' => 'ngg-menu', 'title' => __( 'Gallery' ), 'href' => admin_url('admin.php?page=nextgen-gallery') ) );		
-		if ($options['remove_nxgen'] == 1) $wp_admin_bar->remove_menu('ngg-menu');
-	}
-add_action( 'wp_before_admin_bar_render', 'pands_remove_nxg' );
-}
- else {
-    echo ''; }
-    
-if(is_plugin_active('backwpup/backwpup.php'))
-{
+	if ($options['remove_nxgen'] == 1) $wp_admin_bar->remove_menu('ngg-menu'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_nxg' ); }
+ else { echo ''; }
+
 // REMOVE BACKWPUP FROM THE TOOL BAR
+if(is_plugin_active('backwpup/backwpup.php')) {
 function pands_remove_bwpu() {
 $options = get_option('pands_tbs_plugin_options');
 	global $wp_admin_bar;
-		 $wp_admin_bar->add_menu(array( 'id' => 'backwpup', 'title' => __( 'BackWPup', 'textdomain' ), 'href' => backwpup_admin_url('admin.php').'?page=backwpup'));
-		if ($options['remove_bwpu'] == 1) $wp_admin_bar->remove_menu('backwpup');
-	}
-add_action( 'wp_before_admin_bar_render', 'pands_remove_bwpu' );
-}
- else {
-    echo ''; }
+	if ($options['remove_bwpu'] == 1) $wp_admin_bar->remove_menu('backwpup'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_bwpu' ); }
+ else { echo ''; }
+
+// REMOVE SOCIAL METRICS FROM THE TOOL BAR
+if(is_plugin_active('social-metrics/socialmetrics.php')) {
+function pands_remove_some() {
+$options = get_option('pands_tbs_plugin_options');
+	global $wp_admin_bar;
+	if ($options['remove_some'] == 1) $wp_admin_bar->remove_menu('socialmetrics_dashboard'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_some' ); }
+ else { echo ''; }
+
+// REMOVE ULTIMATE SECURITY CHECKER FROM THE TOOL BAR
+if(is_plugin_active('ultimate-security-checker/wp-ultimate-security.php')) {
+function pands_remove_usc() {
+$options = get_option('pands_tbs_plugin_options');
+	global $wp_admin_bar;
+	if ($options['remove_usc'] == 1) $wp_admin_bar->remove_menu('theme_options'); }
+	add_action( 'wp_before_admin_bar_render', 'pands_remove_usc' ); }
+ else { echo ''; }
+
 ?>
